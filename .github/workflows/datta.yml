@@ -132,7 +132,7 @@ jobs:
     - name: Install cargo-audit
       env:
         AUDIT_LINK: https://github.com/rustsec/rustsec/releases/download/cargo-audit%2F
-        AUDIT_VERSION: v0.20.0
+        AUDIT_VERSION: v0.23.0
       run: |
         curl -L "$AUDIT_LINK$AUDIT_VERSION/cargo-audit-x86_64-unknown-linux-musl-$AUDIT_VERSION.tgz" |
         tar xzv -C $HOME/.cargo/bin --strip-components 1
