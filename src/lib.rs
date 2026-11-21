@@ -288,10 +288,7 @@ impl UriTemplate {
     {
         let mut res = String::new();
 
-        let var = match self.vars.get(&v.name) {
-            Some(v) => v,
-            None => return None,
-        };
+        let var = self.vars.get(&v.name)?;
 
         match *var {
             TemplateVar::Scalar(ref s) => {
@@ -334,9 +331,9 @@ impl UriTemplate {
                                 .iter()
                                 .map(|x| {
                                     let val: String = if x.is_empty() {
-                                        format!("{}{}", &encode_reserved(&v.name), ifemp)
+                                        format!("{}{}", encode_reserved(&v.name), ifemp)
                                     } else {
-                                        format!("{}={}", &encode_reserved(&v.name), &encoder(x))
+                                        format!("{}={}", encode_reserved(&v.name), encoder(x))
                                     };
                                     val
                                 })
@@ -360,7 +357,7 @@ impl UriTemplate {
                         }
                         let pairs: Vec<String> = a
                             .iter()
-                            .map(|(k, v)| format!("{},{}", &encode_reserved(k), &encoder(v)))
+                            .map(|(k, v)| format!("{},{}", encode_reserved(k), encoder(v)))
                             .collect();
                         res.push_str(&pairs.join(","));
                     }
@@ -370,9 +367,9 @@ impl UriTemplate {
                                 .iter()
                                 .map(|(k, v)| {
                                     let val: String = if v.is_empty() {
-                                        format!("{}{}", &encode_reserved(k), ifemp)
+                                        format!("{}{}", encode_reserved(k), ifemp)
                                     } else {
-                                        format!("{}={}", &encode_reserved(k), &encoder(v))
+                                        format!("{}={}", encode_reserved(k), encoder(v))
                                     };
                                     val
                                 })
@@ -381,7 +378,7 @@ impl UriTemplate {
                         } else {
                             let pairs: Vec<String> = a
                                 .iter()
-                                .map(|(k, v)| format!("{}={}", &encode_reserved(k), &encoder(v)))
+                                .map(|(k, v)| format!("{}={}", encode_reserved(k), encoder(v)))
                                 .collect();
                             res.push_str(&pairs.join(sep));
                         }

@@ -90,7 +90,7 @@ impl IntoTemplateVar for TemplateVar {
     }
 }
 
-impl<'a> IntoTemplateVar for &'a str {
+impl IntoTemplateVar for &str {
     fn into_template_var(self) -> TemplateVar {
         TemplateVar::Scalar(self.to_string())
     }
@@ -102,7 +102,7 @@ impl IntoTemplateVar for String {
     }
 }
 
-impl<'a> IntoTemplateVar for &'a [String] {
+impl IntoTemplateVar for &[String] {
     fn into_template_var(self) -> TemplateVar {
         let mut vec = Vec::new();
         for s in self {
@@ -118,7 +118,7 @@ impl IntoTemplateVar for Vec<String> {
     }
 }
 
-impl<'a, 'b> IntoTemplateVar for &'a [&'b str] {
+impl IntoTemplateVar for &[&str] {
     fn into_template_var(self) -> TemplateVar {
         let mut vec = Vec::new();
         for s in self {
@@ -128,7 +128,7 @@ impl<'a, 'b> IntoTemplateVar for &'a [&'b str] {
     }
 }
 
-impl<'a> IntoTemplateVar for &'a [(String, String)] {
+impl IntoTemplateVar for &[(String, String)] {
     fn into_template_var(self) -> TemplateVar {
         let mut vec = Vec::new();
         for s in self {
@@ -144,7 +144,7 @@ impl IntoTemplateVar for Vec<(String, String)> {
     }
 }
 
-impl<'a, 'b, 'c> IntoTemplateVar for &'a [(&'b str, &'c str)] {
+impl IntoTemplateVar for &[(&str, &str)] {
     fn into_template_var(self) -> TemplateVar {
         let mut vec = Vec::new();
         for s in self {
@@ -154,7 +154,7 @@ impl<'a, 'b, 'c> IntoTemplateVar for &'a [(&'b str, &'c str)] {
     }
 }
 
-impl<'a> IntoTemplateVar for &'a HashMap<String, String> {
+impl IntoTemplateVar for &HashMap<String, String> {
     fn into_template_var(self) -> TemplateVar {
         let mut vec = Vec::new();
         for (k, v) in self {
@@ -164,7 +164,7 @@ impl<'a> IntoTemplateVar for &'a HashMap<String, String> {
     }
 }
 
-impl<'a, 'b, 'c> IntoTemplateVar for &'a HashMap<&'b str, &'c str> {
+impl IntoTemplateVar for &HashMap<&str, &str> {
     fn into_template_var(self) -> TemplateVar {
         let mut vec = Vec::new();
         for (k, v) in self {

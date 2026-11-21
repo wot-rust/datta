@@ -55,7 +55,7 @@ struct Address {
     state: String,
 }
 
-impl<'a> IntoTemplateVar for &'a Address {
+impl IntoTemplateVar for &Address {
     fn into_template_var(self) -> TemplateVar {
         TemplateVar::AssociativeArray(vec![
             ("city".to_string(), self.city.clone()),
